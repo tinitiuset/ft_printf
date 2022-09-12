@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 09:18:28 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/12 12:15:56 by mvalient         ###   ########.fr       */
+/*   Created: 2022/09/12 12:00:14 by mvalient          #+#    #+#             */
+/*   Updated: 2022/09/12 12:03:48 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-int	ft_printf(char const *, ...)
-{
-	return (0);
-}
+# include <STDARG.H>
+
+int	ft_printf(char const *, ...);
+
+#endif
