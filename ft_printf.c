@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:18:28 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/13 12:50:33 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:08:01 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	ft_convert_text(char const *s, void *arg)
 	return (i + 1);
 }
 
-int	ft_convert_dec(char const *s)
+int	ft_convert_dec(char const *s, int arg)
 {
-	return (0);
+	if (*s == 'u')
+		return (ft_putnbr((unsigned int)arg, 1));
+	return (ft_putnbr(arg, 1));
 }
 
 int	ft_convert_hexa(char const *s)
@@ -42,7 +44,7 @@ int	ft_convert_filter(char const *s, va_list args)
 	if (*s == 'c' || *s == 's')
 		return (ft_convert_text(s, va_arg(args, char *)));
 	if (*s == 'd' || *s == 'i' || *s == 'u')
-		return (ft_convert_dec(s));
+		return (ft_convert_dec(s, va_arg(args, int)));
 	if (*s == 'p' || *s == 'x' || *s == 'X')
 		return (ft_convert_hexa(s));
 	if (*s == '%')
