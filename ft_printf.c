@@ -6,13 +6,26 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:18:28 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/12 12:15:56 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/13 10:34:05 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(char const *, ...)
+int	ft_printf(char const *s, ...)
 {
+	while(*s)
+	{
+		if (*s != '%')
+		{
+			write(1, s, 1);
+		}
+		else
+		{
+			;	
+		}
+		
+		s++;
+	}
 	return (0);
 }
