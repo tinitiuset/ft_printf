@@ -10,13 +10,16 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@#ar rcs $(NAME) $(OBJS)
-	gcc $(FLAGS) -o $(NAME)  $(SRC)
+	@make bonus -C libft
+	gcc $(FLAGS) -o $(NAME)  $(SRC) libft/libft.a
 	@echo "Compiled"
 clean:
 	@#rm -rf $(OBJS)
+	@make clean -C libft
 	@echo "Removed .o files"
 
 fclean: clean
+	@make fclean -C libft
 	rm -rf $(NAME)
 	@echo "Binary removed"
 
