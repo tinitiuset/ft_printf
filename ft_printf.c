@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:18:28 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/14 17:07:58 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:55:30 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	ft_convert_text(char const *s, void *arg)
 int	ft_convert_dec(char const *s, int arg)
 {
 	if (*s == 'u')
-		ft_putnbr_fd((unsigned int)arg, 1);
-	ft_putnbr_fd(arg, 1);
-	return (0);
+		if (arg < 0)
+			return (ft_convert_text(s, ft_itoa(arg * -1)));
+	return (ft_convert_text(s, ft_itoa(arg)));
 }
 
 int	ft_convert_hexa(char const *s)
