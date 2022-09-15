@@ -6,22 +6,21 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 13:37:41 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/15 17:53:18 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:03:49 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_base_recursive(unsigned long int nbr, char *base, int size,
-	int digits)
+int	ft_putnbr_base_recursive(unsigned long int nbr, char *base,
+	unsigned int size, int digits)
 {
 	unsigned char	i;
 
 	if (nbr >= size)
-		ft_putnbr_base_recursive(nbr / size, base, size, digits);
+		ft_putnbr_base_recursive(nbr / size, base, size, ++digits);
 	i = base[nbr % size];
 	write (1, &i, 1);
-	digits++;
 	return (digits);
 }
 
