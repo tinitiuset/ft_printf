@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:15:43 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/14 18:38:45 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/15 13:25:26 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	ft_printf("%c%s%d%u%i\n", 'c', "asd", 123, -456, 789);
-	printf("%c%s%d%u%i\n", 'c', "asd", 123, -456, 789);
+	ft_printf("%x\n", 155113);
+	printf("%x\n", 155113);
 	return (0);
 }

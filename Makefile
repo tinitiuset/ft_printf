@@ -1,6 +1,7 @@
 NAME= libftprintf.out
 
-SRC = main.c ft_printf.c
+SRC = main.c ft_printf.c \
+	ft_putnbr_base.c
 
 #OBJS = $(SRC:%.c=%.o)
 
