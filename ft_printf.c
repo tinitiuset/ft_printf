@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:18:28 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/15 13:50:38 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:54:16 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ static int	ft_convert_dec(char const *s, int arg)
 	return (ft_convert_text(s, ft_itoa(arg)));
 }
 
-static int	ft_convert_hexa(char const *s, int arg)
+static int	ft_convert_hexa(char const *s, unsigned long int arg)
 {
 	if (*s == 'x')
-		ft_putnbr_base(arg, "0123456789abcdef");
+		return (ft_putnbr_base((unsigned int)arg, "0123456789abcdef"));
 	if (*s == 'X')
-		ft_putnbr_base(arg, "0123456789ABCDEF");
-	return (0);
+		return (ft_putnbr_base((unsigned int)arg, "0123456789ABCDEF"));
+	return (ft_convert_text("s", "0x")
+		+ ft_putnbr_base(arg, "0123456789abcdef"));
 }
 
 int	ft_convert_filter(char const *s, va_list args)
@@ -45,7 +46,7 @@ int	ft_convert_filter(char const *s, va_list args)
 	if (*s == 'd' || *s == 'i' || *s == 'u')
 		return (ft_convert_dec(s, va_arg(args, int)));
 	if (*s == 'p' || *s == 'x' || *s == 'X')
-		return (ft_convert_hexa(s, va_arg(args, int)));
+		return (ft_convert_hexa(s, va_arg(args, unsigned long int)));
 	if (*s == '%')
 		return (write (1, "%", 1));
 	return (0);
