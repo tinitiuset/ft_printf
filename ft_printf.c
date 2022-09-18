@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:18:28 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/15 17:54:16 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/18 18:27:59 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,31 @@ static int	ft_convert_text(char const *s, void *arg)
 {
 	if (*s == 'c')
 		return (write(1, &arg, 1));
+	if (!arg)
+		return (write(1, "(null)", 6));
 	return (write(1, arg, ft_strlen((char *)arg)));
 }
 
 static int	ft_convert_dec(char const *s, int arg)
 {
+	int		i;
+	char	*str;
+	
 	if (*s == 'u')
 		if (arg < 0)
-			return (ft_convert_text(s, ft_itoa((4294967296 + arg) / 100000))
-				+ ft_convert_text(s, ft_itoa((4294967296 + arg) % 100000)));
-	return (ft_convert_text(s, ft_itoa(arg)));
+		{
+			str = ft_itoa((4294967296 + arg) / 100000);
+			i = ft_convert_text(s, str);
+			free(str);
+			str = ft_itoa((4294967296 + arg) % 100000);
+			i = i + ft_convert_text(s, str);
+			free(str);
+			return (i);
+		}
+	str = ft_itoa(arg);
+	i = ft_convert_text(s, str);
+	free(str);
+	return (i);
 }
 
 static int	ft_convert_hexa(char const *s, unsigned long int arg)
@@ -54,22 +69,25 @@ int	ft_convert_filter(char const *s, va_list args)
 
 int	ft_printf(char const *s, ...)
 {
+	int		i;
 	va_list	args;
 
+	i = 0;
 	va_start(args, s);
 	while (*s)
 	{
 		if (*s != '%')
 		{	
 			write(1, s, 1);
+			i++;
 		}
 		else
 		{
-			ft_convert_filter(s, args);
+			i += ft_convert_filter(s, args);
 			s++;
 		}	
 		s++;
 	}
 	va_end(args);
-	return (0);
+	return (i);
 }

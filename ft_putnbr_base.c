@@ -6,19 +6,23 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 13:37:41 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/15 18:03:49 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/18 17:59:35 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 int	ft_putnbr_base_recursive(unsigned long int nbr, char *base,
-	unsigned int size, int digits)
+	unsigned int size)
 {
 	unsigned char	i;
+	int				digits;
 
+	digits = 1;
 	if (nbr >= size)
-		ft_putnbr_base_recursive(nbr / size, base, size, ++digits);
+	{
+			digits = digits + ft_putnbr_base_recursive(nbr / size, base, size);
+	}
 	i = base[nbr % size];
 	write (1, &i, 1);
 	return (digits);
@@ -49,7 +53,7 @@ int	ft_putnbr_base(unsigned long int nbr, char *base)
 	{
 		while (base[i] != '\0')
 			i++;
-		return (ft_putnbr_base_recursive(nbr, base, i, 0));
+		return (ft_putnbr_base_recursive(nbr, base, i));
 	}
 	return (0);
 }
