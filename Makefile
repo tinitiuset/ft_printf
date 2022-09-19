@@ -1,32 +1,27 @@
 NAME= libftprintf.a
 
 SRC =	ft_printf.c ft_putnbr_base.c\
-  		libft/ft_itoa.c libft/ft_strlen.c\
-		libft/ft_strdup.c libft/ft_memcpy.c
+  		libft/ft_strlen.c ft_long_itoa.c
 
 LIBFT = libft/libft.a
 
-OBJS = $(SRC:%.c=%.o)
-
 FLAGS = -Wall -Werror -Wextra
+
+OBJS = $(SRC:%.c=%.o)
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	@#make bonus -C libft
 	@ar rcs $(NAME) $(OBJS)
-	@#gcc $(FLAGS) -o $(NAME)  $(SRC) $(LIBFT)
 	@echo "Compiled"
 clean:
 	@rm -rf $(OBJS)
-	@make clean -C libft
 	@echo "Removed .o files"
 
 fclean: clean
-	@make fclean -C libft
-	rm -rf $(NAME)
-	@echo "Binary removed"
+	@rm -rf $(NAME)
+	@echo "Removed .a file"
 
 re: fclean $(NAME)
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

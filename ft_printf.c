@@ -6,7 +6,7 @@
 /*   By: mvalient <mvalient@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:18:28 by mvalient          #+#    #+#             */
-/*   Updated: 2022/09/18 18:27:59 by mvalient         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:21:50 by mvalient         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,11 @@ static int	ft_convert_dec(char const *s, int arg)
 {
 	int		i;
 	char	*str;
-	
-	if (*s == 'u')
-		if (arg < 0)
-		{
-			str = ft_itoa((4294967296 + arg) / 100000);
-			i = ft_convert_text(s, str);
-			free(str);
-			str = ft_itoa((4294967296 + arg) % 100000);
-			i = i + ft_convert_text(s, str);
-			free(str);
-			return (i);
-		}
-	str = ft_itoa(arg);
+
+	if (*s == 'u' && arg < 0)
+		str = ft_long_itoa((4294967296 + arg));
+	else
+		str = ft_long_itoa(arg);
 	i = ft_convert_text(s, str);
 	free(str);
 	return (i);
@@ -46,11 +38,11 @@ static int	ft_convert_dec(char const *s, int arg)
 static int	ft_convert_hexa(char const *s, unsigned long int arg)
 {
 	if (*s == 'x')
-		return (ft_putnbr_base((unsigned int)arg, "0123456789abcdef"));
+		return (ft_putnbr_base((unsigned int)arg, "0123456789abcdef", 16));
 	if (*s == 'X')
-		return (ft_putnbr_base((unsigned int)arg, "0123456789ABCDEF"));
+		return (ft_putnbr_base((unsigned int)arg, "0123456789ABCDEF", 16));
 	return (ft_convert_text("s", "0x")
-		+ ft_putnbr_base(arg, "0123456789abcdef"));
+		+ ft_putnbr_base(arg, "0123456789abcdef", 16));
 }
 
 int	ft_convert_filter(char const *s, va_list args)
